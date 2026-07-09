@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Traviata Tonight — Arena di Verona</title>
+<meta name="description" content="A friendly companion guide to La Traviata at the Arena di Verona — plot, music, backstory, and survival tips.">
+<style>
+  :root {
+    --night: #171325;
+    --night-2: #201a33;
+    --card: #262040;
+    --cream: #f3ead7;
+    --cream-dim: #cfc4ad;
+    --gold: #e8b64c;
+    --rouge: #e0526b;
+    --rouge-deep: #b03050;
+    --sage: #8fbf9f;
+    --candle: #ffd98a;
+    --line: rgba(232, 182, 76, 0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--night);
+    color: var(--cream);
+    font-family: 'Iowan Old Style', 'Palatino Nova', Palatino, Georgia, serif;
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  ::selection { background: var(--rouge-deep); color: var(--cream); }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(23, 19, 37, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav .nav-inner { display: flex; gap: 4px; padding: 10px 14px; max-width: 720px; margin: 0 auto; }
+  nav a {
+    color: var(--cream-dim); text-decoration: none;
+    font-size: 14px; padding: 5px 11px; border-radius: 999px;
+    border: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  nav a:hover, nav a:focus { color: var(--gold); border-color: var(--line); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ---------- hero ---------- */
+  header.hero { text-align: center; padding: 40px 20px 12px; max-width: 720px; margin: 0 auto; }
+  .hero-art { width: min(340px, 80vw); height: auto; margin: 0 auto 8px; display: block; }
+  h1 {
+    font-size: clamp(42px, 10vw, 64px);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: .01em;
+    color: var(--cream);
+  }
+  h1 .fancy { font-style: italic; color: var(--rouge); }
+  .hero-sub { color: var(--gold); font-size: 18px; font-style: italic; margin-top: 10px; }
+  .hero-date { color: var(--cream-dim); font-size: 15px; margin-top: 6px; }
+
+  .cast-card {
+    margin: 26px auto 0; max-width: 460px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px 22px; text-align: left; font-size: 15px;
+  }
+  .cast-card h3 { color: var(--gold); font-size: 13px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px; text-align: center;}
+  .cast-row { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px dashed rgba(232,182,76,.15); }
+  .cast-row:last-child { border-bottom: none; }
+  .cast-row .role { color: var(--cream-dim); }
+  .cast-row .name { color: var(--cream); text-align: right; }
+
+  /* ---------- sections ---------- */
+  section { padding-top: 58px; }
+  .kicker { color: var(--rouge); font-size: 13px; text-transform: uppercase; letter-spacing: .18em; margin-bottom: 6px; }
+  h2 { font-size: clamp(30px, 6vw, 40px); font-weight: 500; line-height: 1.15; margin-bottom: 18px; }
+  h2 em { color: var(--gold); font-style: italic; }
+  p + p { margin-top: 14px; }
+  .lede { font-size: 19px; color: var(--cream); }
+  .divider { display: block; margin: 46px auto 0; width: 150px; height: auto; opacity: .9; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px 22px; margin-top: 18px;
+  }
+  .card h3 { color: var(--gold); font-size: 20px; margin-bottom: 8px; font-weight: 500; }
+  .card .sub { color: var(--rouge); font-size: 13px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px; }
+
+  .listen {
+    margin-top: 12px; padding: 12px 16px;
+    background: rgba(232,182,76,.08);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    font-size: 15.5px;
+  }
+  .listen strong { color: var(--gold); font-weight: 600; }
+
+  .tip { display: flex; gap: 12px; align-items: flex-start; margin-top: 14px; }
+  .tip svg { flex: 0 0 34px; margin-top: 2px; }
+
+  table.phrase { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 15.5px; }
+  table.phrase td { padding: 8px 10px 8px 0; border-bottom: 1px dashed rgba(232,182,76,.15); vertical-align: top; }
+  table.phrase td:first-child { color: var(--gold); font-style: italic; white-space: nowrap; padding-right: 16px; }
+
+  .timeline { list-style: none; margin-top: 16px; position: relative; padding-left: 26px; }
+  .timeline::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--line); border-radius: 2px; }
+  .timeline li { position: relative; padding: 6px 0 14px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -24px; top: 13px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--rouge); border: 2px solid var(--night);
+    box-shadow: 0 0 0 2px var(--rouge-deep);
+  }
+  .timeline .when { color: var(--gold); font-size: 14px; text-transform: uppercase; letter-spacing: .08em; display: block; }
+
+  .charmap { margin-top: 10px; }
+  .char { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px dashed rgba(232,182,76,.15); }
+  .char:last-child { border-bottom: none; }
+  .char svg { flex: 0 0 46px; }
+  .char b { color: var(--gold); font-weight: 600; }
+  .char .who { font-size: 15.5px; color: var(--cream-dim); }
+  .char .who b { display: block; font-size: 17px; color: var(--gold); }
+
+  .act-badge {
+    display: inline-block; background: var(--rouge-deep); color: var(--cream);
+    font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 3px 12px; border-radius: 999px; margin-bottom: 10px;
+  }
+  .interval-note {
+    text-align: center; color: var(--candle); font-style: italic; font-size: 15px;
+    margin: 22px 0; display: flex; align-items: center; gap: 12px; justify-content: center;
+  }
+  .interval-note::before, .interval-note::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+
+  footer { text-align: center; color: var(--cream-dim); font-size: 14px; padding: 60px 20px 40px; font-style: italic; }
+  footer svg { display: block; margin: 0 auto 12px; }
+  a.ext { color: var(--gold); }
+  .small { font-size: 14px; color: var(--cream-dim); }
+</style>
+</head>
+<body>
+
+<nav aria-label="Sections">
+  <div class="nav-inner">
+    <a href="#story">The Story</a>
+    <a href="#music">Listen For</a>
+    <a href="#backstory">Backstory</a>
+    <a href="#tonight">Tonight</a>
+    <a href="#survival">Arena Guide</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <!-- Arena arches + windmill + stars hero illustration -->
+  <svg class="hero-art" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of the Arena di Verona under stars with a Moulin Rouge windmill">
+    <g fill="none" stroke="#e8b64c" stroke-width="2" stroke-linecap="round">
+      <!-- stars -->
+      <g stroke="#ffd98a" stroke-width="1.6">
+        <path d="M40 28 l0 8 M36 32 l8 0"/>
+        <path d="M300 22 l0 8 M296 26 l8 0"/>
+        <path d="M262 52 l0 6 M259 55 l6 0"/>
+        <path d="M76 55 l0 6 M73 58 l6 0"/>
+        <circle cx="150" cy="18" r="1.6" fill="#ffd98a" stroke="none"/>
+        <circle cx="215" cy="40" r="1.6" fill="#ffd98a" stroke="none"/>
+        <circle cx="108" cy="34" r="1.6" fill="#ffd98a" stroke="none"/>
+      </g>
+      <!-- moon -->
+      <path d="M285 78 a16 16 0 1 0 14 24 a13 13 0 0 1 -14 -24" fill="#ffd98a" stroke="none" opacity=".9"/>
+      <!-- arena: two tiers of arches, hand-drawn wobble -->
+      <path d="M30 190 q2 -55 32 -84 q35 -33 108 -33 q73 0 108 33 q30 29 32 84" />
+      <path d="M56 190 q4 -44 28 -66 q32 -28 86 -28 q54 0 86 28 q24 22 28 66"/>
+      <!-- top tier arches -->
+      <g stroke-width="1.8">
+        <path d="M74 122 q8 -14 16 0 v12 h-16 z"/>
+        <path d="M104 108 q8 -14 16 0 v14 h-16 z"/>
+        <path d="M136 100 q8 -14 16 0 v15 h-16 z"/>
+        <path d="M168 98 q8 -14 16 0 v15 h-16 z"/>
+        <path d="M200 102 q8 -14 16 0 v14 h-16 z"/>
+        <path d="M231 112 q8 -14 16 0 v13 h-16 z"/>
+      </g>
+      <!-- bottom tier arches -->
+      <g stroke-width="1.8">
+        <path d="M66 190 v-24 q9 -16 18 0 v24"/>
+        <path d="M98 190 v-30 q9 -16 18 0 v30"/>
+        <path d="M130 190 v-33 q9 -16 18 0 v33"/>
+        <path d="M162 190 v-34 q9 -16 18 0 v34"/>
+        <path d="M194 190 v-33 q9 -16 18 0 v33"/>
+        <path d="M226 190 v-30 q9 -16 18 0 v30"/>
+        <path d="M256 190 v-25 q9 -16 18 0 v25"/>
+      </g>
+      <!-- windmill rising from the arena (Moulin Rouge) -->
+      <g stroke="#e0526b" stroke-width="2.4">
+        <path d="M170 96 v-40"/>
+        <path d="M170 56 l24 -14 M170 56 l14 24 M170 56 l-24 14 M170 56 l-14 -24"/>
+        <circle cx="170" cy="56" r="3.6" fill="#e0526b" stroke="none"/>
+      </g>
+      <!-- ground line -->
+      <path d="M18 190 h304" stroke-width="2.4"/>
+    </g>
+  </svg>
+  <h1>La <span class="fancy">Traviata</span></h1>
+  <p class="hero-sub">Your companion for tonight at the Arena di Verona</p>
+  <p class="hero-date">Thursday 9 July 2026 · curtain 21:15 · about 3 h with two intervals</p>
+
+  <div class="cast-card">
+    <h3>Tonight's Company</h3>
+    <div class="cast-row"><span class="role">Violetta</span><span class="name">Martina Russomanno</span></div>
+    <div class="cast-row"><span class="role">Alfredo</span><span class="name">Francesco Meli</span></div>
+    <div class="cast-row"><span class="role">Germont</span><span class="name">Ludovic Tézier</span></div>
+    <div class="cast-row"><span class="role">Conductor</span><span class="name">Michele Spotti</span></div>
+    <div class="cast-row"><span class="role">Director</span><span class="name">Paul Curran</span></div>
+    <div class="cast-row"><span class="role">Production</span><span class="name">New 2026 · Moulin Rouge</span></div>
+  </div>
+</header>
+
+<main>
+
+<section id="story">
+  <p class="kicker">Part One</p>
+  <h2>The story, <em>before the lights dim</em></h2>
+
+  <p class="lede">Paris, the 1850s. Violetta Valéry is the most dazzling party hostess in the city — a courtesan, meaning wealthy men pay for her company — and she is secretly very ill. At one of her glittering parties, a sincere young man named Alfredo tells her he's genuinely in love with her, not renting her attention. Against all her instincts, she believes him.</p>
+  <p>Then Alfredo's father arrives with a request that will test how far love can stretch: a sacrifice that will destroy her happiness to protect a family she's never met — and she must keep the reason secret. What follows is a public humiliation, a bitter misunderstanding, and a race against her failing health for the truth to come out. It's a story about a woman braver and more decent than the "respectable" society that scorns her — and about forgiveness that arrives almost, but not quite, too late.</p>
+  <p class="small"><em>La traviata</em> literally means "the woman led astray." It's society's label for Violetta — and the opera spends three acts proving the label wrong.</p>
+
+  <div class="card charmap">
+    <h3>Who's who</h3>
+    <div class="char">
+      <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#e0526b" stroke-width="1.8" stroke-linecap="round"><circle cx="23" cy="23" r="20" stroke="#e8b64c" opacity=".5"/><circle cx="23" cy="21" r="5" fill="#e0526b" stroke="none"/><path d="M23 21 m-5 0 a5 5 0 0 1 10 0 M23 12 q4 3 3 8 M23 12 q-4 3 -3 8 M15 22 q3 4 8 4 M31 22 q-3 4 -8 4 M23 30 q0 -2 0 -4"/><path d="M23 27 v9" stroke="#8fbf9f"/><path d="M23 31 q4 -1 5 -4" stroke="#8fbf9f"/></g></svg>
+      <div class="who"><b>Violetta Valéry <span style="font-weight:400; font-size:13px;">· soprano</span></b>The heroine: a celebrated courtesan, dying of tuberculosis, who risks everything on real love. Her trademark is the camellia flower.</div>
+    </div>
+    <div class="char">
+      <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><circle cx="23" cy="23" r="20" opacity=".5"/><path d="M23 32 q-9 -6 -9 -12 a5 5 0 0 1 9 -3 a5 5 0 0 1 9 3 q0 6 -9 12z" stroke="#e0526b"/></g></svg>
+      <div class="who"><b>Alfredo Germont <span style="font-weight:400; font-size:13px;">· tenor</span></b>Earnest young man from a respectable family; sincerely loves Violetta but is quick to wounded pride — with catastrophic results.</div>
+    </div>
+    <div class="char">
+      <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><circle cx="23" cy="23" r="20" opacity=".5"/><circle cx="23" cy="20" r="7"/><path d="M23 13 v-3 M23 20 v-5 M23 20 l4 2"/><path d="M16 31 q7 4 14 0" /></g></svg>
+      <div class="who"><b>Giorgio Germont <span style="font-weight:400; font-size:13px;">· baritone</span></b>Alfredo's father and the story's engine. He demands Violetta's sacrifice — then comes to revere her. Not a villain; that's what makes it hurt.</div>
+    </div>
+    <div class="char">
+      <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><circle cx="23" cy="23" r="20" opacity=".5"/><path d="M14 30 l9 -14 l9 14 z M23 16 l0 14 M18.5 23 l9 0" stroke="#e0526b"/></g></svg>
+      <div class="who"><b>Flora &amp; the party set <span style="font-weight:400; font-size:13px;">· mezzo &amp; friends</span></b>Flora Bervoix hosts the fateful Act II party; Gastone makes the introduction; the Marquis spreads the gossip.</div>
+    </div>
+    <div class="char">
+      <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><circle cx="23" cy="23" r="20" opacity=".5"/><path d="M15 18 l16 0 l-3 5 l-10 0 z"/><path d="M23 23 v8 M19 31 h8" /></g></svg>
+      <div class="who"><b>Baron Douphol <span style="font-weight:400; font-size:13px;">· baritone</span></b>Violetta's wealthy "protector" and Alfredo's rival. Jealous, cold — and quick to demand a duel.</div>
+    </div>
+    <div class="char">
+      <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#8fbf9f" stroke-width="1.8" stroke-linecap="round"><circle cx="23" cy="23" r="20" stroke="#e8b64c" opacity=".5"/><path d="M17 15 h12 v10 a6 6 0 0 1 -12 0 z M29 17 q5 0 4 4 q-1 3 -4 3"/><path d="M16 34 h14"/></g></svg>
+      <div class="who"><b>Annina &amp; Doctor Grenvil <span style="font-weight:400; font-size:13px;">· the loyal ones</span></b>Violetta's devoted maid and her physician — the only people who never leave her side.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act I</span>
+    <h3>A party, a toast, a crack in the armor</h3>
+    <p class="sub">Violetta's salon, Paris · champagne everywhere</p>
+    <p>Violetta is throwing one of her famous late-night parties, on the arm of her protector, Baron Douphol. Her friend Gastone introduces Alfredo — a young man who quietly adored her from afar, who even came to ask after her every day when she was ill (the Baron never bothered). Alfredo leads the toast: the famous drinking song, the one tune everyone already knows. When a coughing fit seizes Violetta, only Alfredo stays behind — and he tells her plainly that he has loved her for a year. She laughs it off; love isn't in her job description. But she gives him a camellia and tells him to bring it back <em>when it has wilted</em>. That means tomorrow.</p>
+    <p>Alone at the end of the act, she wonders — with real ache — whether this stranger might be the true love she's never allowed herself... then violently shakes it off and vows to stay free, living only for pleasure. From the street below, Alfredo's voice drifts up, singing about love. The armor has cracked, and she knows it.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act II · scene 1</span>
+    <h3>Paradise, interrupted by a polite man</h3>
+    <p class="sub">A country house outside Paris, three months later</p>
+    <p>Violetta walked away from Paris, and the two have been blissfully playing house — funded, Alfredo discovers to his shame, by Violetta secretly selling her horses, carriages and jewels. While he rushes to Paris to raise money, his father Giorgio Germont arrives unannounced. He's come to end the affair: his daughter's engagement is threatened by the family scandal. He expects a gold-digger; he finds a woman of complete integrity who is paying for everything herself. <strong>He asks anyway.</strong></p>
+    <p>Violetta protests that Alfredo is all she has — that she is dying — but Germont grinds her down. She agrees to give Alfredo up forever, asking only that one day, after her death, he learn the truth. She writes a cold farewell letter, and when Alfredo returns she nearly breaks — clinging to him with sudden desperate force: <em>"Amami, Alfredo!"</em> — love me as much as I love you — then flees. Reading her letter moments later, Alfredo assumes she's gone back to the Baron, spots an invitation to Flora's party, and storms off to Paris for revenge.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act II · scene 2</span>
+    <h3>The cruelest party in opera</h3>
+    <p class="sub">Flora's mansion, that same night · masqueraders, gypsies &amp; matadors</p>
+    <p>Alfredo plants himself at the card table and keeps winning — "unlucky in love, lucky at cards," he announces, loudly, as Violetta enters on the Baron's arm. She gets Alfredo alone and begs him to leave before there's a duel. He'll go only if she comes with him. Bound by her promise to his father, she can't explain — so she lies: she says she loves the Baron.</p>
+    <p>Alfredo explodes. He flings open the doors, summons the whole party, and hurls his winnings at Violetta's feet — publicly "paying her back." She collapses. The entire room turns on him in disgust, and his own father — the only person who knows the truth — publicly shames his son. The horror of the scene is that <em>you</em> know the truth too, and almost nobody on stage does. Verdi keeps the party music sparkling while the trap closes.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act III</span>
+    <h3>Too late — and just in time</h3>
+    <p class="sub">Violetta's bedroom, months later · Carnival echoes from the street</p>
+    <p>The furniture is mostly sold. Violetta is dying, and she knows it — the doctor's bedside cheer doesn't fool her. She rereads a letter from Germont: the duel happened (the Baron survived, only wounded), Alfredo went abroad — and his father has finally told him the truth. Alfredo is coming to beg forgiveness. <em>"It's late,"</em> she says, and bids farewell to her happy dreams.</p>
+    <p>Then Annina rushes in. Alfredo is here. The lovers fall into each other's arms and plan to leave Paris and start over — and for a moment, the music believes it. Her body doesn't. Germont arrives, remorseful, embracing her as a daughter: the acceptance she needed, arrived too late. Violetta gives Alfredo a portrait of herself, to give one day to the girl he'll marry. Then suddenly she rises — the pain is gone, life is returning, she cries — and dies in Alfredo's arms. That final surge of strength is a real, documented phenomenon in dying tuberculosis patients, and it will leave the whole amphitheater wrecked.</p>
+  </div>
+
+  <svg class="divider" viewBox="0 0 150 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#e8b64c" stroke-width="1.6" stroke-linecap="round">
+      <path d="M6 17 h44 M100 17 h44"/>
+      <circle cx="75" cy="17" r="7" stroke="#e0526b"/>
+      <circle cx="75" cy="17" r="2.4" fill="#e0526b" stroke="none"/>
+      <path d="M75 10 q3 -4 7 -4 M75 10 q-3 -4 -7 -4" stroke="#8fbf9f"/>
+    </g>
+  </svg>
+</section>
+
+<section id="music">
+  <p class="kicker">Part Two</p>
+  <h2>What to <em>listen for</em></h2>
+
+  <p class="lede">You already know more of this music than you think. Here are the big moments in the order they'll happen tonight — and one melody to memorize early, because Verdi keeps bringing it back.</p>
+
+  <div class="card">
+    <span class="act-badge">Before the curtain</span>
+    <h3>Prelude — the ending, first</h3>
+    <p>The orchestra tells you how the story ends before it begins: whisper-quiet, fragile high violins — Violetta's illness — then the cellos pour out a warm, descending love melody. Remember that tune: it's <em>"Amami, Alfredo,"</em> and it will return at the opera's emotional breaking point (and, decades later, in <em>Pretty Woman</em>). Finally the same melody comes back dressed in glittering violin decoration: the party-girl surface laid over the real heart.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act I</span>
+    <h3>"Libiamo ne' lieti calici" — the Brindisi</h3>
+    <p>The most famous drinking song ever written: an irresistible waltz over a bouncing oom-pah-pah, passed between Alfredo, Violetta and the whole party. Listen to it as a conversation — his verse is sincere, hers answers with the same tune but a cynic's words: <em>enjoy the moment, love fades.</em></p>
+    <div class="listen"><strong>You know this one</strong> from roughly everywhere: Heineken built an ad campaign on it, it shows up in <em>Frasier</em> and countless films, and it was a Pavarotti signature encore.</div>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act I</span>
+    <h3>"Un dì, felice" — memorize this melody</h3>
+    <p>Alone with Violetta, Alfredo confesses a year of quiet love. Midway he lands on <em>"Di quell'amor ch'è palpito"</em> — a surging rise-and-fall phrase. This is the opera's love theme, and Verdi replants it at every crucial turn for the rest of the night. Violetta answers with laughing, fluttery ornaments: she deflects sincerity with sparkle — her entire character in one exchange.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act I finale</span>
+    <h3>"Ah, fors'è lui... Sempre libera"</h3>
+    <p>Violetta's huge solo scene, alone after the party: first slow and wondering (quoting the love theme note for note as she imagines real love), then exploding into "Sempre libera" — a fireworks display of runs and stratospheric high notes as she vows to stay free. But listen underneath: Alfredo's voice drifts in from offstage singing the love theme. The words say freedom; the music says she's already lost.</p>
+    <div class="listen"><strong>You know this one</strong> from <em>Pretty Woman</em> — it's part of the opera Vivian and Edward watch (the opera in that film <em>is</em> La Traviata, a deliberate mirror). Tonight, watch 28-year-old Martina Russomanno take it on.</div>
+  </div>
+
+  <p class="interval-note">— likely interval: they rebuild Paris while you stretch —</p>
+
+  <div class="card">
+    <span class="act-badge">Act II</span>
+    <h3>The Violetta–Germont duet</h3>
+    <p>Many consider this long duet the heart of the whole opera: a negotiation set to music. Germont opens smooth and paternal ("my daughter, pure as an angel..."); Violetta's replies grow shorter and more broken as her resistance collapses. The turning point, <em>"Dite alla giovine,"</em> is her surrender — and it's nearly whispered. Notice how <strong>quiet</strong> the biggest moment of the opera is. With Ludovic Tézier as Germont tonight, this scene is the main event.</p>
+    <div class="listen"><strong>Then comes "Amami, Alfredo!"</strong> — Violetta's searing two-line outburst as she flees. Blink and you miss it, but it's the melody from the prelude, and it's the music that reduces Julia Roberts to tears in <em>Pretty Woman</em>.</div>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act II</span>
+    <h3>"Di Provenza il mar, il suol"</h3>
+    <p>The opera's great baritone aria: Germont consoles his shattered son with a rocking, lullaby-like tune about their native Provence. A great baritone lets you hear both layers — real tenderness, and steady manipulation to bring the boy home. The square, old-fashioned tune <em>is</em> Germont: respectable, traditional, immovable.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act II · scene 2</span>
+    <h3>Gypsies, matadors, and the trap closing</h3>
+    <p>Flora's party opens with pure glitter — tambourines, fortune-tellers, a Spanish-tinged matador chorus (tonight, staged as a Folies Bergère floor show). That's the setup. As the gambling begins, the orchestra turns tense and obsessive under the small talk, until the scene detonates: Alfredo hurls his winnings at Violetta and the entire company rounds on him in one of Verdi's great ensemble outbursts.</p>
+  </div>
+
+  <p class="interval-note">— likely interval: last spritz before the heartbreak —</p>
+
+  <div class="card">
+    <span class="act-badge">Act III</span>
+    <h3>"Addio, del passato"</h3>
+    <p>The Act III prelude reopens with the fragile high-violin illness music from the very start — the frame closing. In the aria, a mournful solo oboe shadows Violetta like a second, failing voice, and Verdi strips the orchestra almost bare, the way the disease has stripped her of everything. Each verse dies away to a thread of sound.</p>
+  </div>
+
+  <div class="card">
+    <span class="act-badge">Act III</span>
+    <h3>"Parigi, o cara" &amp; the finale</h3>
+    <p>Alfredo returns, and the reunited lovers dream of leaving Paris — a gentle duet in waltz time, the ghost of Act I's party music slowed to a heartbeat. The tune dances while Violetta can barely stand. In the final minutes, listen for the love theme one last time, high and disembodied in the violins — and for the cruelest stroke: the music <em>surges upward</em> as Violetta suddenly feels life returning, so her death lands on a rising line, not a falling one.</p>
+    <div class="listen"><strong>Full circle:</strong> <em>Moulin Rouge!</em> — the film behind tonight's staging — borrowed this exact plot shape: the dying courtesan, the disapproving outsiders, death at the moment of reunion.</div>
+  </div>
+
+  <svg class="divider" viewBox="0 0 150 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#e8b64c" stroke-width="1.6" stroke-linecap="round">
+      <path d="M6 17 h44 M100 17 h44"/>
+      <path d="M68 24 q-3 -4 0 -8 q4 -5 10 -3 q4 2 3 7 q-1 4 -6 4 z" stroke="#e0526b"/>
+      <path d="M81 13 q4 -4 8 -2" stroke="#8fbf9f"/>
+    </g>
+  </svg>
+</section>
+
+<section id="backstory">
+  <p class="kicker">Part Three</p>
+  <h2>The <em>scandalous</em> backstory</h2>
+
+  <p class="lede">Violetta was a real woman. She died in Paris six years before the premiere, at 23, and you can still visit her grave in Montmartre — people leave camellias.</p>
+
+  <div class="card">
+    <h3>The real Violetta</h3>
+    <p><strong style="color:var(--gold)">Marie Duplessis</strong> arrived in Paris around age 15 in poverty, worked in a dress shop, and by her late teens had reinvented herself as one of the city's most celebrated courtesans — adding an aristocratic "Du" to plain Alphonsine Plessis, hosting a fashionable salon, and teaching herself to hold her own with writers and counts. Her trademark was the camellia (legend has it, white when she was available to lovers, red when not — a detail from the novel, so take it as legend). Her lovers included the writer <strong style="color:var(--gold)">Alexandre Dumas fils</strong> — son of the Three Musketeers author — and, reportedly, Franz Liszt.</p>
+    <p>She died of tuberculosis on 3 February 1847. Within weeks her belongings — furniture, jewels, even her pet parrot — were auctioned to cover her debts while fashionable Paris gawked; Charles Dickens is said to have attended and marveled at the city's grief. Dumas, heartbroken, wrote <em>La Dame aux camélias</em> within a year. His stage version opened in Paris in February 1852 — and in the audience sat Giuseppe Verdi.</p>
+  </div>
+
+  <div class="card">
+    <h3>Verdi wanted a scandal</h3>
+    <p>In 1853 Verdi was the most famous composer in Italy, mid-hot-streak: <em>Rigoletto</em>, then <em>Il Trovatore</em>, then — just seven weeks later — <em>La Traviata</em>. What thrilled him about the Dumas play was its modernity: "A subject for our own age," he wrote. Opera was supposed to be safely set among kings and myths; Verdi wanted the audience to watch <em>itself</em> — the men in the boxes at La Fenice belonged to the same class as the men who had kept Marie Duplessis.</p>
+    <p>It was personal, too: Verdi was then living unmarried with the singer Giuseppina Strepponi, a woman with a past, enduring the disapproval of respectable provincial society — much like his heroine.</p>
+  </div>
+
+  <div class="card">
+    <h3>The premiere was a fiasco (and Verdi called it)</h3>
+    <ul class="timeline">
+      <li><span class="when">6 March 1853 · La Fenice, Venice</span> Verdi predicted disaster in writing before opening night — and got it. The censors had refused his modern-dress staging and pushed the setting back to circa 1700; worse, Violetta was sung by a well-regarded but 38-year-old, famously robust soprano, and the audience <em>laughed</em> at her dying of consumption. "La traviata has been an immense fiasco," Verdi wrote the next morning, "and what is worse, they laughed... Either I'm wrong or they are."</li>
+      <li><span class="when">6 May 1854 · Venice again</span> Revised, recast with a young soprano, the opera returned — and triumphed. Time told: he wasn't wrong.</li>
+      <li><span class="when">Today</span> It is perennially the #1 or #2 most performed opera on Earth. The story needs no footnotes: social judgment, the price of respectability, love versus family — and a soprano role so demanding it's called "three roles in one": coloratura fireworks in Act I, lyric warmth in Act II, raw truth in Act III.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Little Italian glossary</h3>
+    <table class="phrase">
+      <tr><td>croce e delizia</td><td>"Torment and delight" — Alfredo's definition of love, echoed by Violetta. The whole opera in four words. (KRO-cheh eh deh-LEE-tsyah)</td></tr>
+      <tr><td>Libiamo</td><td>"Let us drink" — first word of the Brindisi. (lee-BYAH-moh)</td></tr>
+      <tr><td>Sempre libera</td><td>"Always free" — Violetta's Act I vow. She won't be. (SEM-preh LEE-beh-rah)</td></tr>
+      <tr><td>Amami, Alfredo</td><td>"Love me, Alfredo" — her searing Act II outburst. (AH-mah-mee)</td></tr>
+      <tr><td>Addio, del passato</td><td>"Farewell, dreams of the past" — the Act III farewell. (ah-DEE-oh)</td></tr>
+      <tr><td>Brava!</td><td>What you'll shout for Violetta tonight. <em>Bravo!</em> for the men, <em>bravi!</em> for everyone. (BRAH-vah)</td></tr>
+      <tr><td>Bis!</td><td>"Again!" — the Italian shout for an encore. At the Arena, it sometimes works.</td></tr>
+      <tr><td>traviata</td><td>"The woman led astray." Society's label for Violetta — which the opera spends three acts disproving.</td></tr>
+    </table>
+  </div>
+
+  <svg class="divider" viewBox="0 0 150 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#e8b64c" stroke-width="1.6" stroke-linecap="round">
+      <path d="M6 17 h44 M100 17 h44"/>
+      <path d="M70 24 l5 -14 M80 24 l-5 -14" stroke="#e0526b"/>
+      <path d="M67 10 a8 8 0 0 1 16 0 z" stroke="#e0526b"/>
+      <circle cx="86" cy="8" r="1.4" fill="#ffd98a" stroke="none"/>
+      <circle cx="63" cy="9" r="1.4" fill="#ffd98a" stroke="none"/>
+    </g>
+  </svg>
+</section>
+
+<section id="tonight">
+  <p class="kicker">Part Four</p>
+  <h2>Tonight's production: <em>Moulin Rouge</em></h2>
+
+  <p class="lede">You're seeing a brand-new staging — it premiered June 12 and opened the 103rd Arena festival. For the first time ever, the actual Moulin Rouge has partnered with an opera house, and director Paul Curran moves the story from the 1850s to Belle Époque Paris (~1900): the Montmartre of cabarets, can-can and the Folies Bergère.</p>
+  <p>It's a historically detailed reconstruction rather than a Baz Luhrmann-style mashup — though the film is an acknowledged inspiration (and <em>Moulin Rouge!</em> borrowed its plot from <em>La Traviata</em> in the first place, so the debt runs both ways). Sets by Juan Guillermo Nova were built in the Arena's own workshops; costumes are by Stefano Ciammitti, choreography by Kyle Lang.</p>
+
+  <div class="card">
+    <h3>Watch for</h3>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e0526b" stroke-width="1.8" stroke-linecap="round"><path d="M17 30 v-13"/><path d="M17 17 l9 -5 M17 17 l5 9 M17 17 l-9 5 M17 17 l-5 -9"/><circle cx="17" cy="17" r="2" fill="#e0526b" stroke="none"/></g></svg>
+      <p><strong>The windmill &amp; the elephant.</strong> Act I opens on a full Montmartre streetscape with the red Moulin Rouge windmill, blades lit — plus a full-scale replica of the giant stucco elephant that really stood in the Moulin Rouge garden (a leftover of the 1889 World's Fair). The act ends with can-can dancers and a confetti finale.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><path d="M8 28 q9 -8 18 0"/><path d="M11 26 q6 -18 12 0"/><circle cx="17" cy="10" r="3"/></g></svg>
+      <p><strong>Flora's party as a Folies Bergère revue.</strong> Act II scene 2 becomes a full cabaret floor show — the gypsy and matador choruses staged as revue numbers with a densely packed stage.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#8fbf9f" stroke-width="1.8" stroke-linecap="round"><path d="M17 6 q2 5 -1 7 q-2 2 -1 5" stroke="#ffd98a"/><path d="M12 18 h10 v9 a5 5 0 0 1 -10 0 z"/></g></svg>
+      <p><strong>The Act III hush.</strong> After two acts of spectacle, the staging strips down to intimate darkness for Violetta's death — critics found it the strongest act of the night. The contrast is the point.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><path d="M7 25 q10 -14 20 0"/><path d="M12 25 v-6 M17 25 v-9 M22 25 v-6"/><path d="M5 25 h24"/></g></svg>
+      <p><strong>The scene changes themselves.</strong> There's no curtain and no fly tower — the Arena's colossal sets are rebuilt in plain view during the intervals. Watching an army of stagehands strike Montmartre is part of the show.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Your cast, briefly</h3>
+    <p><strong style="color:var(--gold)">Martina Russomanno</strong> (Violetta) is the discovery of this festival — 28 years old, an Arena debut, and reviews from the premiere run called her possibly "today's greatest Italian Violetta." <strong style="color:var(--gold)">Francesco Meli</strong> (Alfredo) is one of Italy's leading Verdi tenors. And you've hit the jackpot on Germont: <strong style="color:var(--gold)">Ludovic Tézier</strong> sings only two dates this summer, and tonight is one — he's widely considered <em>the</em> Verdi baritone of our time. Conductor <strong style="color:var(--gold)">Michele Spotti</strong> has been the run's most consistent rave ("a demon of the podium") — listen for unusually delicate, chamber-like playing under the big tunes, especially the cello lines.</p>
+    <p class="small">Fair warning from the critics: the Arena makes its traditional cuts (some aria repeats are trimmed), and in the big party scenes the spectacle occasionally upstages the singers. Nobody disputed the Act III payoff — or the ten minutes of applause on opening night.</p>
+  </div>
+
+  <svg class="divider" viewBox="0 0 150 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#e8b64c" stroke-width="1.6" stroke-linecap="round">
+      <path d="M6 17 h48 M96 17 h48"/>
+      <path d="M75 8 v14 M75 22 l7 -4 M75 8 l9 -3 M75 12 l9 -3" stroke="#e0526b"/>
+    </g>
+  </svg>
+</section>
+
+<section id="survival">
+  <p class="kicker">Part Five</p>
+  <h2>Arena <em>survival guide</em></h2>
+
+  <p class="lede">A 2,000-year-old Roman amphitheater, no roof, natural acoustics, 13,000 people, and opera until well past midnight. Here's how the night works.</p>
+
+  <div class="card">
+    <h3>The evening at a glance</h3>
+    <ul class="timeline">
+      <li><span class="when">~19:15</span> Gates open (two hours before curtain). If you're on the unnumbered stone steps, arrive early — the central sectors facing the stage fill in the first half hour. Official advice: be there at least an hour before.</li>
+      <li><span class="when">~20:45</span> Sun finally off the steps. Rent or unpack your cushion — three hours on Roman stone is penance without one. No cloakroom, so pack light.</li>
+      <li><span class="when">Just before 21:15</span> Dusk. If it's a candle night, small flames pass from row to row until the whole bowl glimmers — the <em>moccoletto</em> tradition, dating back to the first opera night here (Aida, 1913, when there was no electric light). From high on the steps you see the full bowl of flame.</li>
+      <li><span class="when">21:15</span> Curtain. Tonight runs about 3 hours 4 minutes including two long intervals (~20–25 min each — that's when they rebuild Montmartre in front of you).</li>
+      <li><span class="when">~00:20</span> Violetta's final chord, and 13,000 people pour into the Verona night. Gelato is traditional and correct.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>What to bring (and not)</h3>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#8fbf9f" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="14" width="16" height="12" rx="3"/><path d="M13 14 q0 -6 4 -6 q4 0 4 6"/></g></svg>
+      <p><strong>Yes:</strong> a small cushion (or rent one there), a layer for after midnight — the stone radiates heat early but the air cools — a water bottle <strong>up to 0.5 L plastic</strong>, and card or cash for interval drinks.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e0526b" stroke-width="1.8" stroke-linecap="round"><circle cx="17" cy="17" r="12"/><path d="M9 9 l16 16"/></g></svg>
+      <p><strong>No:</strong> glass or metal containers of any kind, bottles over 0.5 L, food (officially — though a discreet pre-curtain panino on the steps is a time-honored local sin), backpacks over 17 L, and professional cameras.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><path d="M10 24 q7 -14 14 0" /><path d="M10 24 h14"/><path d="M17 10 v3 M17 24 v3"/></g></svg>
+      <p><strong>Dress:</strong> stone steps are fully casual — comfortable shoes matter more than style on those steep ancient stairs. (The floor stalls are dressier: no shorts, tank tops or flip-flops for men.)</p></div>
+  </div>
+
+  <div class="card">
+    <h3>If the weather turns</h3>
+    <p>Shows are never cancelled before their start time — a rainy start can be delayed by up to 150 minutes. Light rain usually means a pause (the orchestra's instruments must be protected), then a resumption; stay put and wait for announcements. Small folding umbrellas are allowed in, but a poncho is the smarter choice. Tonight's forecast looks kind: a hot day cooling to a warm, mostly clear evening.</p>
+  </div>
+
+  <div class="card">
+    <h3>Etiquette, decoded</h3>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><path d="M11 20 q6 6 12 0"/><path d="M9 13 q2 -3 4 0 M21 13 q2 -3 4 0"/></g></svg>
+      <p><strong>Applaud like a local.</strong> Big arias earn applause and shouts of <em>bravo!</em> (him), <em>brava!</em> (her), <em>bravi!</em> (everyone) — but wait for the orchestra to finish the number. When in doubt, follow the crowd. If the roar becomes a chant of <em>bis!</em>, that's an encore demand — at the Arena, conductors sometimes actually grant it.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e0526b" stroke-width="1.8" stroke-linecap="round"><path d="M12 10 q10 3 0 14" /><path d="M20 8 v5 M20 17 v5" stroke="#e8b64c"/></g></svg>
+      <p><strong>Never whistle.</strong> In Italy, whistling at a performance is booing. And keep quiet during the music — the Arena's acoustics are natural and largely unamplified, which is half the magic; chatter carries astonishingly far.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#8fbf9f" stroke-width="1.8" stroke-linecap="round"><rect x="10" y="9" width="14" height="18" rx="2.5"/><circle cx="17" cy="15" r="3" stroke="#e0526b"/><path d="M14 23 h6"/></g></svg>
+      <p><strong>Phones down during acts.</strong> No photos or video during the performance, absolutely no flash. Before curtain and at the intervals, snap away.</p></div>
+    <div class="tip"><svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34"><g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round"><rect x="8" y="11" width="18" height="13" rx="2"/><path d="M8 15 h18 M13 11 v-2 M21 11 v-2" /></g></svg>
+      <p><strong>Surtitles:</strong> sung in Italian, with surtitles in Italian and English on two large screens flanking the stage — visible from around the amphitheater.</p></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#e8b64c" stroke-width="1.8" stroke-linecap="round">
+      <circle cx="20" cy="16" r="9"/>
+      <circle cx="20" cy="16" r="3.5" fill="#e0526b" stroke="none"/>
+      <path d="M20 25 q-2 8 -6 12 M20 25 q2 8 6 12"/>
+    </g>
+  </svg>
+  Enjoy the night — <em>croce e delizia</em>.
+</footer>
+
+</body>
+</html>
