@@ -144,6 +144,78 @@
   footer svg { display: block; margin: 0 auto 12px; }
   a.ext { color: var(--gold); }
   .small { font-size: 14px; color: var(--cream-dim); }
+
+  /* ---------- animation: hero ---------- */
+  .mill-blades {
+    animation: spin 14s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .star { animation: twinkle 3.2s ease-in-out infinite; }
+  .star:nth-child(2) { animation-delay: .8s; }
+  .star:nth-child(3) { animation-delay: 1.6s; }
+  .star:nth-child(4) { animation-delay: 2.4s; }
+  .star:nth-child(5) { animation-delay: .4s; }
+  .star:nth-child(6) { animation-delay: 2s; }
+  .star:nth-child(7) { animation-delay: 1.2s; }
+  @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+
+  /* ---------- animation: scroll reveal ---------- */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .js .divider.reveal { transform: scale(.6); }
+  .js .divider.reveal.in { transform: scale(1); }
+
+  /* ---------- animation: floating petals & confetti ---------- */
+  .fx { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .fx span {
+    position: absolute; top: -6%;
+    display: block; width: 14px; height: 14px;
+    opacity: 0;
+    animation: fall var(--t, 11s) linear infinite;
+    animation-delay: var(--d, 0s);
+  }
+  .fx span svg { width: 100%; height: 100%; display: block; animation: sway 3.4s ease-in-out infinite alternate; }
+  @keyframes fall {
+    0% { transform: translateY(-4vh) rotate(0deg); opacity: 0; }
+    8% { opacity: .85; }
+    88% { opacity: .85; }
+    100% { transform: translateY(104vh) rotate(320deg); opacity: 0; }
+  }
+  @keyframes sway { from { transform: translateX(-9px); } to { transform: translateX(9px); } }
+  header.hero { position: relative; }
+  header.hero > *:not(.fx) { position: relative; z-index: 1; }
+  section { position: relative; }
+  section > *:not(.fx) { position: relative; z-index: 1; }
+
+  /* ---------- animation: candle flame ---------- */
+  .flame {
+    animation: flicker 1.1s ease-in-out infinite alternate;
+    transform-box: fill-box; transform-origin: 50% 100%;
+  }
+  @keyframes flicker {
+    0% { transform: scaleY(1) scaleX(1); opacity: .95; }
+    40% { transform: scaleY(1.15) scaleX(.92) rotate(-2deg); }
+    100% { transform: scaleY(.9) scaleX(1.06) rotate(2deg); opacity: .8; }
+  }
+
+  /* ---------- historic images ---------- */
+  figure.art { margin: 18px 0 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block; border-radius: 14px;
+    border: 1px solid var(--line);
+    filter: sepia(.12) saturate(.92);
+  }
+  figure.art figcaption { font-size: 13.5px; color: var(--cream-dim); font-style: italic; margin-top: 8px; text-align: center; }
+  .art-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .art-row { grid-template-columns: 1fr; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mill-blades, .star, .fx span, .fx span svg, .flame { animation: none !important; }
+    .fx { display: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -159,18 +231,28 @@
 </nav>
 
 <header class="hero">
+  <!-- falling camellia petals -->
+  <div class="fx" aria-hidden="true">
+    <span style="left:6%;  --t:12s; --d:0s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#e0526b" opacity=".7"/></svg></span>
+    <span style="left:18%; --t:15s; --d:4s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#b03050" opacity=".7"/></svg></span>
+    <span style="left:32%; --t:13s; --d:8s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#f3ead7" opacity=".5"/></svg></span>
+    <span style="left:55%; --t:16s; --d:2s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#e0526b" opacity=".6"/></svg></span>
+    <span style="left:70%; --t:12.5s; --d:6s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#f3ead7" opacity=".45"/></svg></span>
+    <span style="left:84%; --t:14s; --d:10s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#e0526b" opacity=".7"/></svg></span>
+    <span style="left:93%; --t:17s; --d:1s"><svg viewBox="0 0 14 14"><path d="M7 1 Q13 4 7 13 Q1 4 7 1z" fill="#b03050" opacity=".6"/></svg></span>
+  </div>
   <!-- Arena arches + windmill + stars hero illustration -->
   <svg class="hero-art" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of the Arena di Verona under stars with a Moulin Rouge windmill">
     <g fill="none" stroke="#e8b64c" stroke-width="2" stroke-linecap="round">
       <!-- stars -->
       <g stroke="#ffd98a" stroke-width="1.6">
-        <path d="M40 28 l0 8 M36 32 l8 0"/>
-        <path d="M300 22 l0 8 M296 26 l8 0"/>
-        <path d="M262 52 l0 6 M259 55 l6 0"/>
-        <path d="M76 55 l0 6 M73 58 l6 0"/>
-        <circle cx="150" cy="18" r="1.6" fill="#ffd98a" stroke="none"/>
-        <circle cx="215" cy="40" r="1.6" fill="#ffd98a" stroke="none"/>
-        <circle cx="108" cy="34" r="1.6" fill="#ffd98a" stroke="none"/>
+        <path class="star" d="M40 28 l0 8 M36 32 l8 0"/>
+        <path class="star" d="M300 22 l0 8 M296 26 l8 0"/>
+        <path class="star" d="M262 52 l0 6 M259 55 l6 0"/>
+        <path class="star" d="M76 55 l0 6 M73 58 l6 0"/>
+        <circle class="star" cx="150" cy="18" r="1.6" fill="#ffd98a" stroke="none"/>
+        <circle class="star" cx="215" cy="40" r="1.6" fill="#ffd98a" stroke="none"/>
+        <circle class="star" cx="108" cy="34" r="1.6" fill="#ffd98a" stroke="none"/>
       </g>
       <!-- moon -->
       <path d="M285 78 a16 16 0 1 0 14 24 a13 13 0 0 1 -14 -24" fill="#ffd98a" stroke="none" opacity=".9"/>
@@ -199,7 +281,7 @@
       <!-- windmill rising from the arena (Moulin Rouge) -->
       <g stroke="#e0526b" stroke-width="2.4">
         <path d="M170 96 v-40"/>
-        <path d="M170 56 l24 -14 M170 56 l14 24 M170 56 l-24 14 M170 56 l-14 -24"/>
+        <g class="mill-blades"><path d="M170 56 l24 -14 M170 56 l14 24 M170 56 l-24 14 M170 56 l-14 -24"/></g>
         <circle cx="170" cy="56" r="3.6" fill="#e0526b" stroke="none"/>
       </g>
       <!-- ground line -->
@@ -388,6 +470,16 @@
     <h3>The real Violetta</h3>
     <p><strong style="color:var(--gold)">Marie Duplessis</strong> arrived in Paris around age 15 in poverty, worked in a dress shop, and by her late teens had reinvented herself as one of the city's most celebrated courtesans — adding an aristocratic "Du" to plain Alphonsine Plessis, hosting a fashionable salon, and teaching herself to hold her own with writers and counts. Her trademark was the camellia (legend has it, white when she was available to lovers, red when not — a detail from the novel, so take it as legend). Her lovers included the writer <strong style="color:var(--gold)">Alexandre Dumas fils</strong> — son of the Three Musketeers author — and, reportedly, Franz Liszt.</p>
     <p>She died of tuberculosis on 3 February 1847. Within weeks her belongings — furniture, jewels, even her pet parrot — were auctioned to cover her debts while fashionable Paris gawked; Charles Dickens is said to have attended and marveled at the city's grief. Dumas, heartbroken, wrote <em>La Dame aux camélias</em> within a year. His stage version opened in Paris in February 1852 — and in the audience sat Giuseppe Verdi.</p>
+    <div class="art-row">
+      <figure class="art">
+        <img src="img/duplessis.jpg" width="602" height="720" loading="lazy" alt="Oil portrait of Marie Duplessis by Édouard Viénot">
+        <figcaption>Marie Duplessis, the real Violetta — portrait by Édouard Viénot, c. 1845.</figcaption>
+      </figure>
+      <figure class="art">
+        <img src="img/verdi.jpg" width="525" height="720" loading="lazy" alt="Pastel portrait of Giuseppe Verdi in top hat and scarf by Giovanni Boldini, 1886">
+        <figcaption>Giuseppe Verdi, by Giovanni Boldini (1886).</figcaption>
+      </figure>
+    </div>
   </div>
 
   <div class="card">
@@ -403,6 +495,10 @@
       <li><span class="when">6 May 1854 · Venice again</span> Revised, recast with a young soprano, the opera returned — and triumphed. Time told: he wasn't wrong.</li>
       <li><span class="when">Today</span> It is perennially the #1 or #2 most performed opera on Earth. The story needs no footnotes: social judgment, the price of respectability, love versus family — and a soprano role so demanding it's called "three roles in one": coloratura fireworks in Act I, lyric warmth in Act II, raw truth in Act III.</li>
     </ul>
+    <figure class="art">
+      <img src="img/premiere.jpg" width="720" height="488" loading="lazy" alt="Poster for the first performance of La Traviata at La Fenice, Venice, 1853">
+      <figcaption>The poster for the world premiere — La Fenice, Venice, 6 March 1853. "An immense fiasco."</figcaption>
+    </figure>
   </div>
 
   <div class="card">
@@ -431,11 +527,32 @@
 </section>
 
 <section id="tonight">
+  <!-- falling cabaret confetti -->
+  <div class="fx" aria-hidden="true">
+    <span style="left:8%;  --t:9s;  --d:0s"><svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1" fill="#e8b64c" opacity=".8"/></svg></span>
+    <span style="left:22%; --t:11s; --d:3s"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4" fill="#e0526b" opacity=".8"/></svg></span>
+    <span style="left:38%; --t:10s; --d:6s"><svg viewBox="0 0 14 14"><rect x="4" y="2" width="6" height="10" rx="1" fill="#8fbf9f" opacity=".7"/></svg></span>
+    <span style="left:52%; --t:8.5s; --d:1.5s"><svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1" fill="#e0526b" opacity=".75"/></svg></span>
+    <span style="left:66%; --t:12s; --d:4.5s"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4" fill="#e8b64c" opacity=".8"/></svg></span>
+    <span style="left:80%; --t:9.5s; --d:7s"><svg viewBox="0 0 14 14"><rect x="4" y="2" width="6" height="10" rx="1" fill="#f3ead7" opacity=".55"/></svg></span>
+    <span style="left:91%; --t:10.5s; --d:2s"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4" fill="#b03050" opacity=".8"/></svg></span>
+  </div>
   <p class="kicker">Part Four</p>
   <h2>Tonight's production: <em>Moulin Rouge</em></h2>
 
   <p class="lede">You're seeing a brand-new staging — it premiered June 12 and opened the 103rd Arena festival. For the first time ever, the actual Moulin Rouge has partnered with an opera house, and director Paul Curran moves the story from the 1850s to Belle Époque Paris (~1900): the Montmartre of cabarets, can-can and the Folies Bergère.</p>
   <p>It's a historically detailed reconstruction rather than a Baz Luhrmann-style mashup — though the film is an acknowledged inspiration (and <em>Moulin Rouge!</em> borrowed its plot from <em>La Traviata</em> in the first place, so the debt runs both ways). Sets by Juan Guillermo Nova were built in the Arena's own workshops; costumes are by Stefano Ciammitti, choreography by Kyle Lang.</p>
+
+  <div class="art-row">
+    <figure class="art">
+      <img src="img/goulue.jpg" width="447" height="720" loading="lazy" alt="Toulouse-Lautrec's 1891 Moulin Rouge poster featuring the dancer La Goulue">
+      <figcaption>The real thing: Toulouse-Lautrec's 1891 Moulin Rouge poster — the world tonight's staging recreates.</figcaption>
+    </figure>
+    <figure class="art">
+      <img src="img/elephant.jpg" width="599" height="720" loading="lazy" alt="The giant stucco elephant in the Moulin Rouge garden, circa 1890">
+      <figcaption>The Moulin Rouge garden elephant, c. 1890 — rebuilt full-scale on the Arena stage tonight. <span style="opacity:.7">(Photo: Bibliothèque nationale de France / Gallica, CC BY 4.0)</span></figcaption>
+    </figure>
+  </div>
 
   <div class="card">
     <h3>Watch for</h3>
@@ -468,6 +585,28 @@
   <h2>Arena <em>survival guide</em></h2>
 
   <p class="lede">A 2,000-year-old Roman amphitheater, no roof, natural acoustics, 13,000 people, and opera until well past midnight. Here's how the night works.</p>
+
+  <svg style="display:block; margin:18px auto 0;" width="150" height="56" viewBox="0 0 150 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#e8b64c" stroke-width="1.7" stroke-linecap="round">
+      <g>
+        <path class="flame" d="M35 22 q4 -8 0 -13 q-4 5 0 13" fill="#ffd98a" stroke="#ffd98a"/>
+        <path d="M31 26 h8 M32 26 l1 22 h6 l1 -22" />
+      </g>
+      <g>
+        <path class="flame" style="animation-delay:.35s" d="M75 18 q4.5 -9 0 -15 q-4.5 6 0 15" fill="#ffd98a" stroke="#ffd98a"/>
+        <path d="M70 22 h10 M71 22 l1.5 26 h5 l1.5 -26"/>
+      </g>
+      <g>
+        <path class="flame" style="animation-delay:.7s" d="M115 22 q4 -8 0 -13 q-4 5 0 13" fill="#ffd98a" stroke="#ffd98a"/>
+        <path d="M111 26 h8 M112 26 l1 22 h6 l1 -22"/>
+      </g>
+    </g>
+  </svg>
+
+  <figure class="art">
+    <img src="img/arena1900.jpg" width="720" height="550" loading="lazy" alt="Hand-colored photochrom of the Arena di Verona, circa 1890-1900">
+    <figcaption>Your venue, photographed in the 1890s — it was already 1,800 years old then.</figcaption>
+  </figure>
 
   <div class="card">
     <h3>The evening at a glance</h3>
@@ -519,7 +658,27 @@
     </g>
   </svg>
   Enjoy the night — <em>croce e delizia</em>.
+  <br><span style="font-size:12px; opacity:.7">Historic images: public domain via Wikimedia Commons; elephant photo BnF/Gallica, CC BY 4.0.</span>
 </footer>
 
+<script>
+  document.documentElement.classList.add('js');
+  let pending = [...document.querySelectorAll('.card, .divider, .lede, .interval-note, figure.art, .cast-card')];
+  pending.forEach(el => el.classList.add('reveal'));
+
+  function revealCheck() {
+    if (!pending.length) return;
+    const limit = window.innerHeight * 0.92;
+    pending = pending.filter(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < limit && r.bottom > 0) { el.classList.add('in'); return false; }
+      return true;
+    });
+  }
+  window.addEventListener('scroll', revealCheck, { passive: true });
+  window.addEventListener('resize', revealCheck, { passive: true });
+  window.addEventListener('pageshow', revealCheck);
+  revealCheck();
+</script>
 </body>
 </html>
